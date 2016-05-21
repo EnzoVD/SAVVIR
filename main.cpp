@@ -15,7 +15,7 @@
 
 // --input=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon.jpg --mask=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon_mask.jpg --output=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon_out_IFQ1.jpg
 // --input=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon.jpg  --mask=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon_mask.jpg  --output=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon_out_IFQ1.jpg
-
+//Bonjour connard
 int main(int argc, char *argv[])
 {
         // ------------------------------------------
