@@ -9,9 +9,9 @@ void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gi
     for(int x=0; x<width; x++)
         for(int y=0;y<height; y++)
             {
-            Rout[x][y] = 255 -  Rin[x][y];
-            if(Gin != 0) Gout[x][y] = 255 -  Gin[x][y];
-            if(Bin != 0) Bout[x][y] = 255 - Bin[x][y];
+            if(Mask[x][y] != 0) Rout[x][y] = 255 - Rin[x][y];
+            if(Mask[x][y]  != 0) Gout[x][y] = 255 - Gin[x][y];
+            if(Mask[x][y]  != 0) Bout[x][y] = 255 - Bin[x][y];
             }
 }
 
