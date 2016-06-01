@@ -66,7 +66,7 @@ void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height
     b=Iin;
     xk=b;
     dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height);
-    res=100
+    res=100;
 
 
 
