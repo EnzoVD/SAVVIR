@@ -131,7 +131,7 @@ float** Transposition_Matrice(float **Matrice)
    int w=sizeof(Matrice[][1]);
    int h=sizeof(Matrice[1][]);
 
-    float **MatriceT[w][h];
+    float MatriceT[w][h];
 
     for(int i=0; i<height; i++)
     {
@@ -150,7 +150,7 @@ float** Addition_Matrice(float **Matrice1, float **Matrice2)
     int w=sizeof(Matrice1[][1]);
     int h=sizeof(Matrice1[1][]);
 
-    float **Matrice[w][h];
+    float Matrice[w][h];
 
     for(int i=0; i<height; i++)
     {
@@ -169,7 +169,7 @@ float** Soustraction_Matrice(float **Matrice1, float **Matrice2)
     int w=sizeof(Matrice1[][1]);
     int h=sizeof(Matrice1[1][]);
 
-    float **Matrice[w][h];
+    float Matrice[w][h];
 
     for(int i=0; i<height; i++)
     {
@@ -213,7 +213,7 @@ float** Multiplication_Scalaire_Matrice(float scal, float** A){
 
     int w=sizeof(A[][1]);
     int h=sizeof(A[1][]);
-    floatR[w][h];
+    float R[w][h];
 
     for(int x=0; x<w;x++){
 
