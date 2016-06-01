@@ -203,13 +203,34 @@ float** Multiplication_Scalaire_Matrice(float scal, float** A){
 }
 
 float** Multiplication_Matrice(float** A, float** B){
+
     wA=sizeof(A[][1]);
     hA=sizeof(A[1][]);
     R=new float[w][h];
 
+//    for(int x=0; x<w;x++){
+
+//        for(int y=0; y<h;y++){
+
+//            R[x][y]=scal*A[x][y];
+//        }
+
+//    }
+
+    for(int y1=0; y1<h;y1++){
+        for(int y2=0; y2<h;y2++){
+            R[y2][y1]=0;
+            for(int x=0; x<w;x++){
+
+            R[y2][y1]=R[y2][y1]+A[x][y1]*B[y2][x];
 
 
-    return R
+            }
+        }
+    }
+
+
+    return R;
 }
 
 //Somme de tous les éléments d'une matrice
