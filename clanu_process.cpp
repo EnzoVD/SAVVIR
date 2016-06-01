@@ -7,6 +7,13 @@ template <typename T,unsigned S>
 inline unsigned arraysize(const T (&v)[S]) { return S; }
 
 float ** Matrice_A(float **, float **, int, int);
+float** Transposition_Matrice(float **Matrice);
+float** Addition_Matrice(float **Matrice1, float **Matrice2);
+float** Soustraction_Matrice(float **Matrice1, float **Matrice2);
+float** Multiplication_TaT_Matrice(float** A, float** B);
+float** Multiplication_Scalaire_Matrice(float scal, float** A);
+float** Multiplication_Matrice(float** A, float** B);
+float Sum_Elements_Matrice(float** Mat);
 
 // to complete for Q1
 void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gin, float **Bin, float **Mask, int width, int height, double param)
@@ -25,6 +32,7 @@ void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gi
 
 float ** Matrice_A(float **Mask, float **Input, int width, int height)
 {
+    float J[width][height];
     for(int i=0; i<width; i++){
         bool bool_iplus = (i<width);
         int iplus = fmin(i+1,width);
