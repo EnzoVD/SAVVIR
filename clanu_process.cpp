@@ -70,7 +70,12 @@ void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height
   while(res>param){
       rk=SoustractionMatrice(b,Matrice_A(xk,Mask,width,height));
       Ark=Matrice_A(rk,Mask);
-      alphak=0;
+          alphak = sum(sum(rk.*rk))/sum(sum(Ark.*rk));
+              xk = xk + alphak*dk;
+              prov=rk;
+              rk=b-matrice_A(xk,Masque);
+              betak=sum(sum(rk.*rk))/sum(sum(prov.*prov));
+              dk=rk+betak*dk;
 
   }
 
@@ -199,6 +204,21 @@ float** Matrice_Mult_Scal(float scal, float** A){
 
 float Sum_Elements_Matrice(float** Mat){
     float R=0;
+
+    w=sizeof(Mat[][1]);
+    h=sizeof(Mat[1][]);
+    R=new float[w][h];
+
+    for(int x=0; x<w;x++){
+
+        for(int y=0; y<h;y++){
+
+            R=R + Mat[x][y];
+        }
+
+    }
+    return R;
+
 
 }
 
