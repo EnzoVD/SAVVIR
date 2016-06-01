@@ -65,10 +65,28 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 // Opérations sur les matrices
 // Somme
 
-//Soustraction
+// /////// Transposition
 
-// transposee
+float** TranspositionMatrice(float **Matrice, float **MatriceT)
+{
+    MatriceT[i][j] = Matrice[j][i];
 
+    return MatriceT;
+}
+
+//************Addition************
+float** AdditionMatrice(float **Matrice,float **Matrice1, float **Matrice2)
+{
+    for(int i=0; i<height; i++)
+    {
+        for(int j=0; j<width; j++)
+        {
+            Matrice[i][j] = Matrice1[i][j] + Matrice2[i][j];
+        }
+    }
+
+    return Matrice;
+}
 
 
 //Multiplication terme à terme
