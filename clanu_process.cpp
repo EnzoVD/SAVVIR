@@ -111,12 +111,25 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 // Opérations sur les matrices
 // Somme
 
+void dispMat(float** mat){
+
+    for(int i=0; i<4; i++)    //This loops on the rows.
+    {
+        for(int j=0; j<4; j++) //This loops on the columns
+        {
+            cout << mat[i][j]  << "  ";
+        }
+        cout << endl;
+    }
+}
+
+
 // /////// Transposition
 
 float** Transposition_Matrice(float **Matrice)
 {
-    w=sizeof(Matrice[][1]);
-    h=sizeof(Matrice[1][]);
+   int w=sizeof(Matrice[][1]);
+   int h=sizeof(Matrice[1][]);
 
     float **MatriceT[w][h];
 
@@ -134,8 +147,8 @@ float** Transposition_Matrice(float **Matrice)
 //************Addition************
 float** Addition_Matrice(float **Matrice1, float **Matrice2)
 {
-    w=sizeof(Matrice1[][1]);
-    h=sizeof(Matrice1[1][]);
+    int w=sizeof(Matrice1[][1]);
+    int h=sizeof(Matrice1[1][]);
 
     float **Matrice[w][h];
 
@@ -153,8 +166,8 @@ float** Addition_Matrice(float **Matrice1, float **Matrice2)
 //************Addition************
 float** Soustraction_Matrice(float **Matrice1, float **Matrice2)
 {
-    w=sizeof(Matrice1[][1]);
-    h=sizeof(Matrice1[1][]);
+    int w=sizeof(Matrice1[][1]);
+    int h=sizeof(Matrice1[1][]);
 
     float **Matrice[w][h];
 
@@ -175,9 +188,9 @@ float** Soustraction_Matrice(float **Matrice1, float **Matrice2)
 float** Multiplication_TaT_Matrice(float** A, float** B){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
-    w=sizeof(A[][1]);
-    h=sizeof(A[1][]);
-    R=new float[w][h];
+    int w=sizeof(A[][1]);
+    int h=sizeof(A[1][]);
+    float R[w][h];
 
     for(int x=0; x<w;x++){
 
@@ -198,9 +211,9 @@ float** Multiplication_TaT_Matrice(float** A, float** B){
 float** Multiplication_Scalaire_Matrice(float scal, float** A){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
-    w=sizeof(A[][1]);
-    h=sizeof(A[1][]);
-    R=new float[w][h];
+    int w=sizeof(A[][1]);
+    int h=sizeof(A[1][]);
+    floatR[w][h];
 
     for(int x=0; x<w;x++){
 
@@ -216,18 +229,11 @@ float** Multiplication_Scalaire_Matrice(float scal, float** A){
 
 float** Multiplication_Matrice(float** A, float** B){
 
-    wA=sizeof(A[][1]);
-    hA=sizeof(A[1][]);
-    R=new float[w][h];
+    int w=sizeof(A[][1]);
+    int h=sizeof(A[1][]);
+    float R[w][h];
 
-//    for(int x=0; x<w;x++){
 
-//        for(int y=0; y<h;y++){
-
-//            R[x][y]=scal*A[x][y];
-//        }
-
-//    }
 
     for(int y1=0; y1<h;y1++){
         for(int y2=0; y2<h;y2++){
@@ -250,9 +256,9 @@ float** Multiplication_Matrice(float** A, float** B){
 float Sum_Elements_Matrice(float** Mat){
     float R=0;
 
-    w=sizeof(Mat[][1]);
-    h=sizeof(Mat[1][]);
-    R=new float[w][h];
+    int w=sizeof(Mat[][1]);
+    int h=sizeof(Mat[1][]);
+    float R[w][h];
 
     for(int x=0; x<w;x++){
 
