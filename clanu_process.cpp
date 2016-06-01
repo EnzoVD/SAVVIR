@@ -62,20 +62,23 @@ void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height
 
   b=Iin;
   xk=b;
-  dk=SoustractionMatrice(b,Matrice_A(Iin,Mask,width,height);
+  dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height);
 
 
 
 
   while(res>param){
-      rk=SoustractionMatrice(b,Matrice_A(xk,Mask,width,height));
-      Ark=Matrice_A(rk,Mask);
-          alphak = sum(sum(rk.*rk))/sum(sum(Ark.*rk));
+      rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
+      Ark=Matrice_A(rk,Mask,width,height);
+      alphak = Sum_Elements_Matrice(Matrice_Mult_Tat(rk,rk))/Sum_Elements_Matrice(Matrice_Mult_Tat(Ark,rk));
               xk = xk + alphak*dk;
               prov=rk;
-              rk=b-matrice_A(xk,Masque);
-              betak=sum(sum(rk.*rk))/sum(sum(prov.*prov));
-              dk=rk+betak*dk;
+              rk=Soustraction_Matrice(b,matrice_A(xk,Mask,width,height));
+              betak=Sum_Elements_Matrice(Matrice_Mult_Tat(rk,rk))/Sum_Elements_Matrice(Matrice_Mult_Tat(prov,prov));
+
+
+              //dk=rk+betak*dk;
+
 
   }
 
@@ -109,7 +112,7 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 
 // /////// Transposition
 
-float** TranspositionMatrice(float **Matrice, float **MatriceT)
+float** Transposition_Matrice(float **Matrice, float **MatriceT)
 {
     MatriceT[i][j] = Matrice[j][i];
 
@@ -117,7 +120,7 @@ float** TranspositionMatrice(float **Matrice, float **MatriceT)
 }
 
 //************Addition************
-float** AdditionMatrice(float **Matrice1, float **Matrice2)
+float** Addition_Matrice(float **Matrice1, float **Matrice2)
 {
     w=sizeof(Matrice1[][1]);
     h=sizeof(Matrice1[1][]);
@@ -136,7 +139,7 @@ float** AdditionMatrice(float **Matrice1, float **Matrice2)
 }
 
 //************Addition************
-float** SoustractionMatrice(float **Matrice1, float **Matrice2)
+float** Soustraction_Matrice(float **Matrice1, float **Matrice2)
 {
     w=sizeof(Matrice1[][1]);
     h=sizeof(Matrice1[1][]);
@@ -157,7 +160,7 @@ float** SoustractionMatrice(float **Matrice1, float **Matrice2)
 
 //Multiplication terme à terme
 
-float** Matrice_Mult_Tat(float** A, float** B){
+float** Multiplication_TaT_Matrice(float** A, float** B){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
     w=sizeof(A[][1]);
@@ -180,7 +183,7 @@ float** Matrice_Mult_Tat(float** A, float** B){
 
 //Multiplication
 
-float** Matrice_Mult_Scal(float scal, float** A){
+float** Multiplication_Scalaire_Matrice(float scal, float** A){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
     w=sizeof(A[][1]);
@@ -199,6 +202,15 @@ float** Matrice_Mult_Scal(float scal, float** A){
 
 }
 
+float** Multiplication_Matrice(float** A, float** B){
+    wA=sizeof(A[][1]);
+    hA=sizeof(A[1][]);
+    R=new float[w][h];
+
+
+
+    return R
+}
 
 //Somme de tous les éléments d'une matrice
 
