@@ -29,13 +29,13 @@ int main(int argc, char *argv[])
         parser.addHelpOption();
         parser.addVersionOption();
 
-        QCommandLineOption inputFileOption(QStringList() << "i" << "input", "C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn\coming-soon_out_IFQ1.jpg", "file");
+        QCommandLineOption inputFileOption(QStringList() << "i" << "input", "Fullpath and extension of the input <file>.", "file");
         parser.addOption(inputFileOption);
 
-        QCommandLineOption maskFileOption(QStringList() << "m" << "mask", "C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn\coming-soon_mask.jpg", "file");
+        QCommandLineOption maskFileOption(QStringList() << "m" << "Fullpath and extension of the input <file>.", "file");
         parser.addOption(maskFileOption);
 
-        QCommandLineOption outputFileOption(QStringList() << "o" << "output", "C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn", "file");
+        QCommandLineOption outputFileOption(QStringList() << "o" << "output", "Fullpath and extension of the input <file>.", "file");
         parser.addOption(outputFileOption);
 
         // Process the actual command line arguments given by the user
