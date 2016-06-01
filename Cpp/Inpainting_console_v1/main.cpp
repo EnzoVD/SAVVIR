@@ -15,7 +15,7 @@
 
 // --input=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon.jpg --mask=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon_mask.jpg --output=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon_out_IFQ1.jpg
 // --input=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon.jpg  --mask=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon_mask.jpg  --output=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon_out_IFQ1.jpg
-//Bonjour connard
+//--input=C:\Users\Adrien\Documents\"00--Etudes"\INSA\3GE\CLANU--svn\Data\coming-soon.jpg  --mask=C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn\Data\coming-soon_mask.jpg  --output=C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn\Data\coming-soon_out_IFQ1.jpg
 int main(int argc, char *argv[])
 {
         // ------------------------------------------
@@ -29,13 +29,13 @@ int main(int argc, char *argv[])
         parser.addHelpOption();
         parser.addVersionOption();
 
-        QCommandLineOption inputFileOption(QStringList() << "i" << "input", "Fullpath and extension of the input <file>.", "file");
+        QCommandLineOption inputFileOption(QStringList() << "i" << "input", "C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn\coming-soon_out_IFQ1.jpg", "file");
         parser.addOption(inputFileOption);
 
-        QCommandLineOption maskFileOption(QStringList() << "m" << "mask", "Fullpath and extension of the mask <file>.", "file");
+        QCommandLineOption maskFileOption(QStringList() << "m" << "mask", "C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn\coming-soon_mask.jpg", "file");
         parser.addOption(maskFileOption);
 
-        QCommandLineOption outputFileOption(QStringList() << "o" << "output", "Fullpath and extension of the output <file>.", "file");
+        QCommandLineOption outputFileOption(QStringList() << "o" << "output", "C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn", "file");
         parser.addOption(outputFileOption);
 
         // Process the actual command line arguments given by the user
