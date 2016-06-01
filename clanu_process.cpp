@@ -32,7 +32,8 @@ void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gi
 
 float ** Matrice_A(float **Mask, float **Input, int width, int height)
 {
-    float J[width][height];
+    float**J;
+    J= new float[width][height];
     for(int i=0; i<width; i++){
         bool bool_iplus = (i<width);
         int iplus = fmin(i+1,width);
@@ -84,8 +85,8 @@ float res;
 
             rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
             Ark=Matrice_A(rk,Mask,width,height);
-            alphak = Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk))/Sum_Elements_Matrice(Matrice_Mult_Tat(Ark,rk));
-            xk = xk + alphak*dk;
+            alphak = Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk))/Sum_Elements_Matrice(Multiplication_TaT_Matrice(Ark,rk));
+            xk = Additon_Matrice(xk, Multiplication_Matrice(alphak,dk));
             prov=rk;
             rk=Soustraction_Matrice(b,matrice_A(xk,Mask,width,height));
             betak=Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk))/Sum_Elements_Matrice(Multiplication_TaT_Matrice(prov,prov));
