@@ -53,34 +53,35 @@ void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height
 {
 
 
-  float**b;
-  float**xk;
-  float**dk;
-  float**rk;
-  float alphak;
-  float**prov;
+    float**b;
+    float**xk;
+    float**dk;
+    float**rk;
+    float alphak;
+    float**prov;
 
-  b=Iin;
-  xk=b;
-  dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height);
-
-
+    b=Iin;
+    xk=b;
+    dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height);
 
 
-  while(res>param){
-      rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
-      Ark=Matrice_A(rk,Mask,width,height);
-      alphak = Sum_Elements_Matrice(Matrice_Mult_Tat(rk,rk))/Sum_Elements_Matrice(Matrice_Mult_Tat(Ark,rk));
-              xk = xk + alphak*dk;
-              prov=rk;
-              rk=Soustraction_Matrice(b,matrice_A(xk,Mask,width,height));
-              betak=Sum_Elements_Matrice(Matrice_Mult_Tat(rk,rk))/Sum_Elements_Matrice(Matrice_Mult_Tat(prov,prov));
 
 
-              //dk=rk+betak*dk;
+            while(res>param){
+
+            rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
+            Ark=Matrice_A(rk,Mask,width,height);
+            alphak = Sum_Elements_Matrice(Matrice_Mult_Tat(rk,rk))/Sum_Elements_Matrice(Matrice_Mult_Tat(Ark,rk));
+            xk = xk + alphak*dk;
+            prov=rk;
+            rk=Soustraction_Matrice(b,matrice_A(xk,Mask,width,height));
+            betak=Sum_Elements_Matrice(Matrice_Mult_Tat(rk,rk))/Sum_Elements_Matrice(Matrice_Mult_Tat(prov,prov));
+            dk=Addition_Matrice(rk,Multiplication_Matrice(betak,dk));
+
+            //dk=rk+betak*dk;
 
 
-  }
+}
 
 
 
@@ -112,7 +113,7 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 
 // /////// Transposition
 
-float** Transposition_Matrice(float **Matrice, float **MatriceT)
+float** Transposition_Matrice(float **MatriceT)
 {
     MatriceT[i][j] = Matrice[j][i];
 
