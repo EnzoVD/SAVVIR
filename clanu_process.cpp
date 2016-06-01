@@ -3,7 +3,7 @@
 
 #include "clanu_process.h";
 #include <math.h>;
-
+float ** Matrice_A(float **, float **, int, int);
 
 // to complete for Q1
 void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gin, float **Bin, float **Mask, int width, int height, double param)
@@ -22,7 +22,6 @@ void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gi
 
 float ** Matrice_A(float **Mask, float **Input, int width, int height)
 {
-    float **J;
     for(int i=0; i<width; i++){
         bool bool_iplus = (i<width);
         int iplus = fmin(i+1,width);
@@ -53,6 +52,31 @@ float ** Matrice_A(float **Mask, float **Input, int width, int height)
 void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height, double param)
 {
 
+
+  float**b;
+  float**xk;
+  float**dk;
+  float**rk;
+  float alphak;
+  float**prov;
+
+  b=Iin;
+  xk=b;
+  dk=SoustractionMatrice(b,Matrice_A(Iin,Mask,width,height);
+
+
+
+
+  while(res>param){
+      rk=SoustractionMatrice(b,Matrice_A(xk,Mask,width,height));
+      Ark=Matrice_A(rk,Mask);
+      alphak=0;
+
+  }
+
+
+
+
 }
 
 
@@ -63,24 +87,37 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 }
 
 
+// Gradient conjugué
+
+
+
+
+
+
+
+
+
+
+
 // Opérations sur les matrices
 // Somme
 
-//************Transposition************
+// /////// Transposition
 
-float** TranspositionMatrice(float **Matrice)
+float** TranspositionMatrice(float **Matrice, float **MatriceT)
 {
-    float MatriceT;
     MatriceT[i][j] = Matrice[j][i];
 
     return MatriceT;
 }
 
 //************Addition************
-
 float** AdditionMatrice(float **Matrice1, float **Matrice2)
 {
-    float **Matrice;
+    w=sizeof(Matrice1[][1]);
+    h=sizeof(Matrice1[1][]);
+
+    float **Matrice[w][h];
 
     for(int i=0; i<height; i++)
     {
@@ -93,11 +130,29 @@ float** AdditionMatrice(float **Matrice1, float **Matrice2)
     return Matrice;
 }
 
+//************Addition************
+float** SoustractionMatrice(float **Matrice1, float **Matrice2)
+{
+    w=sizeof(Matrice1[][1]);
+    h=sizeof(Matrice1[1][]);
+
+    float **Matrice[w][h];
+
+    for(int i=0; i<height; i++)
+    {
+        for(int j=0; j<width; j++)
+        {
+            Matrice[i][j] = Matrice1[i][j] - Matrice2[i][j];
+        }
+    }
+
+    return Matrice;
+}
+
 
 //Multiplication terme à terme
 
-float** Matrice_Mult_Tat(float** A, float** B)
-{
+float** Matrice_Mult_Tat(float** A, float** B){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
     w=sizeof(A[][1]);
@@ -116,10 +171,11 @@ float** Matrice_Mult_Tat(float** A, float** B)
 
 }
 
+
+
 //Multiplication
 
-float** Matrice_Mult_Scal(float scal, float** A)
-{
+float** Matrice_Mult_Scal(float scal, float** A){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
     w=sizeof(A[][1]);
@@ -138,4 +194,14 @@ float** Matrice_Mult_Scal(float scal, float** A)
 
 }
 
+
+//Somme de tous les éléments d'une matrice
+
+float Sum_Elements_Matrice(float** Mat){
+    float R=0;
+
+}
+
+
+//PDS
 
