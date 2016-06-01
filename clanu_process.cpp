@@ -18,19 +18,19 @@ void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gi
 
 }
 
-// Matrice du produit A*B
+// /////// Matrice du produit A*B
 
 float ** Matrice_Ab(float **J, float **Mask, float **Input, int width, int height)
 {
-    for(int i=0; i<width; i++){
-        bool bool_iplus = (i<width);
-        int iplus = fmin(i+1,width);
+    for(int i=0; i<height; i++){
+        bool bool_iplus = (i<height);
+        int iplus = fmin(i+1,height);
         bool bool_imoins = (i>1);
         int imoins = fmax(i-1,1);
 
-        for(int j=0; j<height; j++){
-            bool bool_jplus = (j<height);
-            int jplus = fmin(j+1,height);
+        for(int j=0; j<width; j++){
+            bool bool_jplus = (j<width);
+            int jplus = fmin(j+1,width);
             bool bool_jmoins = (j>1);
             int jmoins = fmax(j-1,1);
 
@@ -47,6 +47,29 @@ float ** Matrice_Ab(float **J, float **Mask, float **Input, int width, int heigh
 
     return J;
 }
+
+// /////// Transposition
+
+float** TranspositionMatrice(float **Matrice, float **MatriceT)
+{
+    MatriceT[i][j] = Matrice[j][i];
+
+    return MatriceT;
+}
+
+float** AdditionMatrice(float **Matrice,float **Matrice1, float **Matrice2)
+{
+    for(int i=0; i<height; i++)
+    {
+        for(int j=0; j<width; j++)
+        {
+            Matrice[i][j] = Matrice1[i][j] + Matrice2[i][j];
+        }
+    }
+
+    return Matrice;
+}
+
 
 // to do ... IF Q2
 void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height, double param)
