@@ -67,16 +67,18 @@ void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height
 
     float**b;
     float**xk;
+    float**xk2;
     float**dk;
     float**rk;
     float alphak;
+    float betak;
     float**Ark;
     float**prov;
 float res;
 
     b=Iin;
     xk=b;
-    dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height);
+    dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height));
     res=100;
 
 
@@ -86,11 +88,12 @@ float res;
             rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
             Ark=Matrice_A(rk,Mask,width,height);
             alphak = Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk))/Sum_Elements_Matrice(Multiplication_TaT_Matrice(Ark,rk));
-            xk = Additon_Matrice(xk, Multiplication_Matrice(alphak,dk));
+            xk2 = Addition_Matrice(xk, Multiplication_Scalaire_Matrice(alphak,dk));
+            xk=xk2;
             prov=rk;
-            rk=Soustraction_Matrice(b,matrice_A(xk,Mask,width,height));
+            rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
             betak=Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk))/Sum_Elements_Matrice(Multiplication_TaT_Matrice(prov,prov));
-            dk=Addition_Matrice(rk,Multiplication_Matrice(betak,dk));
+            dk=Addition_Matrice(rk,Multiplication_Scalaire_Matrice(betak,dk));
 
             //dk=rk+betak*dk;
 
