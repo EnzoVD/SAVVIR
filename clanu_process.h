@@ -16,7 +16,7 @@ float** Addition_Matrice(float **Matrice1, float **Matrice2);
 float** Soustraction_Matrice(float **Matrice1, float **Matrice2);
 float** Multiplication_TaT_Matrice(float** A, float** B);
 float** Multiplication_Scalaire_Matrice(float scal, float** A);
-float** Multiplication_Matrice(float** A, float** B)
+float** Multiplication_Matrice(float** A, float** B);
 float Sum_Elements_Matrice(float** Mat);
 
 
