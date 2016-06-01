@@ -3,7 +3,7 @@
 
 #include "clanu_process.h";
 #include <math.h>;
-float ** Matrice_Ab(float **, float **, float **, int, int);
+
 
 // to complete for Q1
 void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gin, float **Bin, float **Mask, int width, int height, double param)
@@ -20,8 +20,9 @@ void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gi
 
 // Matrice du produit A*B
 
-float ** Matrice_Ab(float **J, float **Mask, float **Input, int width, int height)
+float ** Matrice_A(float **Mask, float **Input, int width, int height)
 {
+    float **J;
     for(int i=0; i<width; i++){
         bool bool_iplus = (i<width);
         int iplus = fmin(i+1,width);
@@ -65,18 +66,22 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 // Opérations sur les matrices
 // Somme
 
-// /////// Transposition
+//************Transposition************
 
-float** TranspositionMatrice(float **Matrice, float **MatriceT)
+float** TranspositionMatrice(float **Matrice)
 {
+    float MatriceT;
     MatriceT[i][j] = Matrice[j][i];
 
     return MatriceT;
 }
 
 //************Addition************
-float** AdditionMatrice(float **Matrice,float **Matrice1, float **Matrice2)
+
+float** AdditionMatrice(float **Matrice1, float **Matrice2)
 {
+    float **Matrice;
+
     for(int i=0; i<height; i++)
     {
         for(int j=0; j<width; j++)
@@ -91,7 +96,8 @@ float** AdditionMatrice(float **Matrice,float **Matrice1, float **Matrice2)
 
 //Multiplication terme à terme
 
-float** Matrice_Mult_Tat(float** A, float** B){
+float** Matrice_Mult_Tat(float** A, float** B)
+{
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
     w=sizeof(A[][1]);
@@ -110,11 +116,10 @@ float** Matrice_Mult_Tat(float** A, float** B){
 
 }
 
-
-
 //Multiplication
 
-float** Matrice_Mult_Scal(float scal, float** A){
+float** Matrice_Mult_Scal(float scal, float** A)
+{
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
     w=sizeof(A[][1]);
@@ -133,6 +138,4 @@ float** Matrice_Mult_Scal(float scal, float** A){
 
 }
 
-
-//PDS
 
