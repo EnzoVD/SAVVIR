@@ -3,6 +3,9 @@
 
 #include "clanu_process.h";
 #include <math.h>;
+template <typename T,unsigned S>
+inline unsigned arraysize(const T (&v)[S]) { return S; }
+
 float ** Matrice_A(float **, float **, int, int);
 
 // to complete for Q1
@@ -63,7 +66,7 @@ void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height
     b=Iin;
     xk=b;
     dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height);
-
+    res=100
 
 
 
@@ -109,27 +112,14 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 
 
 // Opérations sur les matrices
-// Somme
-
-void dispMat(float** mat){
-
-    for(int i=0; i<4; i++)    //This loops on the rows.
-    {
-        for(int j=0; j<4; j++) //This loops on the columns
-        {
-            cout << mat[i][j]  << "  ";
-        }
-        cout << endl;
-    }
-}
 
 
 // /////// Transposition
 
 float** Transposition_Matrice(float **Matrice)
 {
-   int w=sizeof(Matrice[][1]);
-   int h=sizeof(Matrice[1][]);
+   int w=arraysize(Matrice[][1]);
+   int h=arraysize(Matrice[1][]);
 
     float MatriceT[w][h];
 
@@ -147,8 +137,8 @@ float** Transposition_Matrice(float **Matrice)
 //************Addition************
 float** Addition_Matrice(float **Matrice1, float **Matrice2)
 {
-    int w=sizeof(Matrice1[][1]);
-    int h=sizeof(Matrice1[1][]);
+    int w=arraysize(Matrice1[][1]);
+    int h=arraysize(Matrice1[1][]);
 
     float Matrice[w][h];
 
@@ -166,8 +156,8 @@ float** Addition_Matrice(float **Matrice1, float **Matrice2)
 //************Addition************
 float** Soustraction_Matrice(float **Matrice1, float **Matrice2)
 {
-    int w=sizeof(Matrice1[][1]);
-    int h=sizeof(Matrice1[1][]);
+    int w=arraysize(Matrice1[][1]);
+    int h=arraysize(Matrice1[1][]);
 
     float Matrice[w][h];
 
@@ -188,8 +178,8 @@ float** Soustraction_Matrice(float **Matrice1, float **Matrice2)
 float** Multiplication_TaT_Matrice(float** A, float** B){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
-    int w=sizeof(A[][1]);
-    int h=sizeof(A[1][]);
+    int w=arraysize(A[][1]);
+    int h=arraysize(A[1][]);
     float R[w][h];
 
     for(int x=0; x<w;x++){
@@ -211,8 +201,8 @@ float** Multiplication_TaT_Matrice(float** A, float** B){
 float** Multiplication_Scalaire_Matrice(float scal, float** A){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
-    int w=sizeof(A[][1]);
-    int h=sizeof(A[1][]);
+    int w=arraysize(A[][1]);
+    int h=arraysize(A[1][]);
     float R[w][h];
 
     for(int x=0; x<w;x++){
@@ -229,8 +219,8 @@ float** Multiplication_Scalaire_Matrice(float scal, float** A){
 
 float** Multiplication_Matrice(float** A, float** B){
 
-    int w=sizeof(A[][1]);
-    int h=sizeof(A[1][]);
+    int w=arraysize(A[][1]);
+    int h=arraysize(A[1][]);
     float R[w][h];
 
 
@@ -256,8 +246,8 @@ float** Multiplication_Matrice(float** A, float** B){
 float Sum_Elements_Matrice(float** Mat){
     float R=0;
 
-    int w=sizeof(Mat[][1]);
-    int h=sizeof(Mat[1][]);
+    int w=arraysize(Mat[][1]);
+    int h=arraysize(Mat[1][]);
     float R[w][h];
 
     for(int x=0; x<w;x++){

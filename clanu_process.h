@@ -11,7 +11,13 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 
 //Add your own functions' declaration below
 
-
+float** Transposition_Matrice(float **Matrice);
+float** Addition_Matrice(float **Matrice1, float **Matrice2);
+float** Soustraction_Matrice(float **Matrice1, float **Matrice2);
+float** Multiplication_TaT_Matrice(float** A, float** B);
+float** Multiplication_Scalaire_Matrice(float scal, float** A);
+float** Multiplication_Matrice(float** A, float** B)
+float Sum_Elements_Matrice(float** Mat);
 
 
 
