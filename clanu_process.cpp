@@ -113,9 +113,20 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 
 // /////// Transposition
 
-float** Transposition_Matrice(float **MatriceT)
+float** Transposition_Matrice(float **Matrice)
 {
+    w=sizeof(Matrice[][1]);
+    h=sizeof(Matrice[1][]);
+
+    float **MatriceT[w][h];
+
+    for(int i=0; i<height; i++)
+    {
+        for(int j=0; j<width; j++)
+        {
     MatriceT[i][j] = Matrice[j][i];
+        }
+    }
 
     return MatriceT;
 }
