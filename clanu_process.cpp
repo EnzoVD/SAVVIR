@@ -1,19 +1,22 @@
 // Clanu 2015 - 2016
 // T. Grenier : thomas.grenier@insa-lyon.fr
 
-#include "clanu_process.h";
-#include <math.h>;
+#include "clanu_process.h"
+#include "imageconvert.h"
+#include <math.h>
+
 template <typename T,unsigned S>
 inline unsigned arraysize(const T (&v)[S]) { return S; }
 
 float ** Matrice_A(float **, float **, int, int);
-float** Transposition_Matrice(float **Matrice);
-float** Addition_Matrice(float **Matrice1, float **Matrice2);
-float** Soustraction_Matrice(float **Matrice1, float **Matrice2);
-float** Multiplication_TaT_Matrice(float** A, float** B);
-float** Multiplication_Scalaire_Matrice(float scal, float** A);
-float** Multiplication_Matrice(float** A, float** B);
-float Sum_Elements_Matrice(float** Mat);
+float** Transposition_Matrice(float **Matrice,int width,int height);
+float** Addition_Matrice(float **Matrice1, float **Matrice2,int width,int height);
+float** Soustraction_Matrice(float **Matrice1, float **Matrice2,int width,int height);
+float** Multiplication_TaT_Matrice(float** A, float** B,int width,int height);
+float** Multiplication_Scalaire_Matrice(float scal, float** A,int width,int height);
+float** Multiplication_Matrice(float** A, float** B,int width,int height);
+float Sum_Elements_Matrice(float** Mat,int width,int height);
+void GetSizeTab(float** Mat, int* width, int* height);
 
 // to complete for Q1
 void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gin, float **Bin, float **Mask, int width, int height, double param)
@@ -32,8 +35,8 @@ void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gi
 
 float ** Matrice_A(float **Mask, float **Input, int width, int height)
 {
-    float**J;
-    J= new float[width][height];
+    float** J = AllocateFloatArray(width,height);
+
     for(int i=0; i<width; i++){
         bool bool_iplus = (i<width);
         int iplus = fmin(i+1,width);
@@ -65,15 +68,15 @@ void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height
 {
 
 
-    float**b;
-    float**xk;
-    float**xk2;
-    float**dk;
-    float**rk;
+    float**b=AllocateFloatArray(width,height);
+    float**xk=AllocateFloatArray(width,height);
+    float**xk2=AllocateFloatArray(width,height);
+    float**dk=AllocateFloatArray(width,height);
+    float**rk=AllocateFloatArray(width,height);
     float alphak;
     float betak;
-    float**Ark;
-    float**prov;
+    float**Ark=AllocateFloatArray(width,height);
+    float**prov=AllocateFloatArray(width,height);
 float res;
 
     b=Iin;
@@ -87,17 +90,16 @@ float res;
 
             rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
             Ark=Matrice_A(rk,Mask,width,height);
-            alphak = Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk))/Sum_Elements_Matrice(Multiplication_TaT_Matrice(Ark,rk));
-            xk2 = Addition_Matrice(xk, Multiplication_Scalaire_Matrice(alphak,dk));
+            alphak = Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk,width,height),width,height)/Sum_Elements_Matrice(Multiplication_TaT_Matrice(Ark,rk,width,height),width,height);
+            xk2 = Addition_Matrice(xk, Multiplication_Scalaire_Matrice(alphak,dk,width,height),width,height);
             xk=xk2;
             prov=rk;
-            rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
-            betak=Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk))/Sum_Elements_Matrice(Multiplication_TaT_Matrice(prov,prov));
-            dk=Addition_Matrice(rk,Multiplication_Scalaire_Matrice(betak,dk));
+            rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height),width,height);
+            betak=Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk,width,height),width,height)/Sum_Elements_Matrice(Multiplication_TaT_Matrice(prov,prov,width,height),width,height);
+            dk=Addition_Matrice(rk,Multiplication_Scalaire_Matrice(betak,dk,width,height),width,height);
 
-            //dk=rk+betak*dk;
-
-
+            //Calcul de res
+            res = Sum_Elements_Matrice(Multiplication_Scalaire_Matrice(1/(height*width),Multiplication_TaT_Matrice(Transposition_Matrice(dk,width,height), dk,width,height),width,height),width,height);
 }
 
 
@@ -130,16 +132,17 @@ void InpaintingColor(float **Rout, float **Gout, float **Bout, float **Rin, floa
 
 // /////// Transposition
 
-float** Transposition_Matrice(float **Matrice)
+float** Transposition_Matrice(float **Matrice,int w,int h)
 {
-   int w=arraysize(Matrice[][1]);
-   int h=arraysize(Matrice[1][]);
 
-    float MatriceT[w][h];
 
-    for(int i=0; i<height; i++)
+
+
+    float** MatriceT = AllocateFloatArray(w,h);
+
+    for(int i=0; i<w; i++)
     {
-        for(int j=0; j<width; j++)
+        for(int j=0; j<h; j++)
         {
     MatriceT[i][j] = Matrice[j][i];
         }
@@ -149,16 +152,15 @@ float** Transposition_Matrice(float **Matrice)
 }
 
 //************Addition************
-float** Addition_Matrice(float **Matrice1, float **Matrice2)
+float** Addition_Matrice(float **Matrice1, float **Matrice2,,int w,int h)
 {
-    int w=arraysize(Matrice1[][1]);
-    int h=arraysize(Matrice1[1][]);
 
-    float Matrice[w][h];
 
-    for(int i=0; i<height; i++)
+    float ** Matrice = AllocateFloatArray(w,h);
+
+    for(int i=0; i<w; i++)
     {
-        for(int j=0; j<width; j++)
+        for(int j=0; j<h; j++)
         {
             Matrice[i][j] = Matrice1[i][j] + Matrice2[i][j];
         }
@@ -168,16 +170,15 @@ float** Addition_Matrice(float **Matrice1, float **Matrice2)
 }
 
 //************Addition************
-float** Soustraction_Matrice(float **Matrice1, float **Matrice2)
+float** Soustraction_Matrice(float **Matrice1, float **Matrice2,int w,int h)
 {
-    int w=arraysize(Matrice1[][1]);
-    int h=arraysize(Matrice1[1][]);
 
-    float Matrice[w][h];
 
-    for(int i=0; i<height; i++)
+    float **Matrice = AllocateFloatArray(w,h);
+
+    for(int i=0; i<w; i++)
     {
-        for(int j=0; j<width; j++)
+        for(int j=0; j<h; j++)
         {
             Matrice[i][j] = Matrice1[i][j] - Matrice2[i][j];
         }
@@ -189,12 +190,10 @@ float** Soustraction_Matrice(float **Matrice1, float **Matrice2)
 
 //Multiplication terme à terme
 
-float** Multiplication_TaT_Matrice(float** A, float** B){
+float** Multiplication_TaT_Matrice(float** A, float** B,int w,int h){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
-    int w=arraysize(A[][1]);
-    int h=arraysize(A[1][]);
-    float R[w][h];
+     float** R = AllocateFloatArray(w,h);
 
     for(int x=0; x<w;x++){
 
@@ -212,12 +211,11 @@ float** Multiplication_TaT_Matrice(float** A, float** B){
 
 //Multiplication
 
-float** Multiplication_Scalaire_Matrice(float scal, float** A){
+float** Multiplication_Scalaire_Matrice(float scal, float** A,,int w,int h){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
-    int w=arraysize(A[][1]);
-    int h=arraysize(A[1][]);
-    float R[w][h];
+
+    float** R = AllocateFloatArray(w,h);
 
     for(int x=0; x<w;x++){
 
@@ -231,11 +229,10 @@ float** Multiplication_Scalaire_Matrice(float scal, float** A){
 
 }
 
-float** Multiplication_Matrice(float** A, float** B){
+float** Multiplication_Matrice(float** A, float** B,int w,int h){
 
-    int w=arraysize(A[][1]);
-    int h=arraysize(A[1][]);
-    float R[w][h];
+
+    float** R= AllocateFloatArray(w,h);
 
 
 
@@ -257,12 +254,10 @@ float** Multiplication_Matrice(float** A, float** B){
 
 //Somme de tous les éléments d'une matrice
 
-float Sum_Elements_Matrice(float** Mat){
+float Sum_Elements_Matrice(float** Mat,,int w,int h){
     float R=0;
 
-    int w=arraysize(Mat[][1]);
-    int h=arraysize(Mat[1][]);
-    float R[w][h];
+
 
     for(int x=0; x<w;x++){
 
@@ -276,6 +271,19 @@ float Sum_Elements_Matrice(float** Mat){
 
 
 }
+
+
+//void GetSizeTab(float** Mat, int* width, int* height){
+
+//    *width=sizeof(Mat)/sizeof(Mat[0]);
+
+//    *height=sizeof(Mat[0])/sizeof(Mat[0][0]);
+
+//}
+
+
+
+
 
 
 //PDS
