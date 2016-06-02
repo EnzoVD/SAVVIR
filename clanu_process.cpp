@@ -17,6 +17,7 @@ float** Multiplication_Scalaire_Matrice(float scal, float** A,int width,int heig
 float** Multiplication_Matrice(float** A, float** B,int width,int height);
 float Sum_Elements_Matrice(float** Mat,int width,int height);
 void GetSizeTab(float** Mat, int* width, int* height);
+void Copie_Matrice(float** Mat1,float** Mat2,int w, int h);
 
 // to complete for Q1
 void Question1(float **Rout, float **Gout, float **Bout, float **Rin, float **Gin, float **Bin, float **Mask, int width, int height, double param)
@@ -77,7 +78,7 @@ void InpaintingBW(float **Iout, float **Iin, float **Mask, int width, int height
     float betak;
     float**Ark=AllocateFloatArray(width,height);
     float**prov=AllocateFloatArray(width,height);
-float res;
+    float res;
 
     b=Iin;
     xk=b;
@@ -102,7 +103,7 @@ float res;
             res = Sum_Elements_Matrice(Multiplication_Scalaire_Matrice(1/(height*width),Multiplication_TaT_Matrice(Transposition_Matrice(dk,width,height), dk,width,height),width,height),width,height);
 }
 
-            Copie_Matrice(Iout,xk);
+            Copie_Matrice(Iout,xk,width,height);
 
 
 

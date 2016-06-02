@@ -12,7 +12,8 @@
 #include "imageconvert.h"
 #include "clanu_process.h"
 
-
+//C:\Partage\Documents\Travail\GE\Data\
+//--input=C:\Partage\Documents\Travail\GE\Data\coming-soon_out_IFQ1.jpg  --mask=C:\Partage\Documents\Travail\GE\Data\coming-soon_mask.jpg  --output=C:\Partage\Documents\Travail\GE\Data\test_coming-soon_out_Q2.jpg
 // --input=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon.jpg --mask=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon_mask.jpg --output=E:/Documents/Insa-GE/Modules/IF2/Clanu/2015/Data/coming-soon_out_IFQ1.jpg
 // --input=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon.jpg  --mask=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon_mask.jpg  --output=D:\Travail\GE\CLANU\2016\Clanu reposwc\Data\coming-soon_out_IFQ1.jpg
 //--input=C:\Users\Adrien\Documents\"00--Etudes"\INSA\3GE\CLANU--svn\Data\coming-soon.jpg  --mask=C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn\Data\coming-soon_mask.jpg  --output=C:\Users\Adrien\Documents\00--Etudes\INSA\3GE\CLANU--svn\Data\coming-soon_out_IFQ1.jpg
@@ -103,7 +104,7 @@ int main(int argc, char *argv[])
         std::cout << " done !" << std::endl;
         // ------------------------------------------
 
-
+/*
         // ------------------------------------------
         // Appel de la fonction de traitement Question 1
         // Call student processing function
@@ -118,10 +119,10 @@ int main(int argc, char *argv[])
         FloatToQImage( OutputImage, In_w, In_h, Out_R, Out_G, Out_B, InputImage.format());
         std::cout << " done !" << std::endl;
         // ------------------------------------------
+*/
 
 
-
-        /*  //  <- Remove for question 2
+          //  <- Remove for question 2
         // ------------------------------------------
         // Appel de la fonction de traitement Question 2
         // Call student processing function
@@ -135,7 +136,7 @@ int main(int argc, char *argv[])
         FloatToQImage( OutputImage, In_w, In_h, Out_R, 0, 0, InputImage.format());
         std::cout << " done !" << std::endl;
         // ------------------------------------------
-        */ //   <- Remove for question 2
+         //   <- Remove for question 2
 
 
 
