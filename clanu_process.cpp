@@ -5,8 +5,8 @@
 #include "imageconvert.h"
 #include <math.h>
 
-template <typename T,unsigned S>
-inline unsigned arraysize(const T (&v)[S]) { return S; }
+//test
+
 
 float ** Matrice_A(float **, float **, int, int);
 float** Transposition_Matrice(float **Matrice,int width,int height);
