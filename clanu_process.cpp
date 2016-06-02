@@ -81,14 +81,14 @@ float res;
 
     b=Iin;
     xk=b;
-    dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height));
+    dk=Soustraction_Matrice(b,Matrice_A(Iin,Mask,width,height),width,height);
     res=100;
 
 
 
             while(res>param){
 
-            rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height));
+            rk=Soustraction_Matrice(b,Matrice_A(xk,Mask,width,height),width,height);
             Ark=Matrice_A(rk,Mask,width,height);
             alphak = Sum_Elements_Matrice(Multiplication_TaT_Matrice(rk,rk,width,height),width,height)/Sum_Elements_Matrice(Multiplication_TaT_Matrice(Ark,rk,width,height),width,height);
             xk2 = Addition_Matrice(xk, Multiplication_Scalaire_Matrice(alphak,dk,width,height),width,height);
@@ -102,6 +102,7 @@ float res;
             res = Sum_Elements_Matrice(Multiplication_Scalaire_Matrice(1/(height*width),Multiplication_TaT_Matrice(Transposition_Matrice(dk,width,height), dk,width,height),width,height),width,height);
 }
 
+            Copie_Matrice(Iout,xk);
 
 
 
@@ -152,7 +153,7 @@ float** Transposition_Matrice(float **Matrice,int w,int h)
 }
 
 //************Addition************
-float** Addition_Matrice(float **Matrice1, float **Matrice2,,int w,int h)
+float** Addition_Matrice(float **Matrice1, float **Matrice2,int w,int h)
 {
 
 
@@ -211,7 +212,7 @@ float** Multiplication_TaT_Matrice(float** A, float** B,int w,int h){
 
 //Multiplication
 
-float** Multiplication_Scalaire_Matrice(float scal, float** A,,int w,int h){
+float** Multiplication_Scalaire_Matrice(float scal, float** A,int w,int h){
     //Pas besoin de vérifier les tailles, bonnes tailles par construction
 
 
@@ -254,7 +255,7 @@ float** Multiplication_Matrice(float** A, float** B,int w,int h){
 
 //Somme de tous les éléments d'une matrice
 
-float Sum_Elements_Matrice(float** Mat,,int w,int h){
+float Sum_Elements_Matrice(float** Mat,int w,int h){
     float R=0;
 
 
@@ -272,6 +273,20 @@ float Sum_Elements_Matrice(float** Mat,,int w,int h){
 
 }
 
+
+void Copie_Matrice(float** Mat1,float** Mat2,int w, int h){
+    //copie Mat2 dans Mat1
+
+    for(int x=0; x<w;x++){
+
+        for(int y=0; y<h;y++){
+
+            Mat1[x][y]=Mat2[x][y];
+        }
+
+    }
+
+}
 
 //void GetSizeTab(float** Mat, int* width, int* height){
 
